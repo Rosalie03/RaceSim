@@ -1,0 +1,12 @@
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\bin\Debug\net6.0\Controller.deps.json
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\bin\Debug\net6.0\Controller.dll
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\bin\Debug\net6.0\Controller.pdb
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.csproj.AssemblyReference.cache
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.AssemblyInfoInputs.cache
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.AssemblyInfo.cs
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.csproj.CoreCompileInputs.cache
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.dll
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\refint\Controller.dll
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.pdb
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\ref\Controller.dll

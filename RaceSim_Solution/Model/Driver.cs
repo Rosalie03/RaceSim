@@ -8,12 +8,21 @@ using Model;
 
 namespace Model 
 {
-    public class Driver
+    public class Driver : IParticipant
     {
-        public Driver(string naam, int aantal)
+        public string Name { get; set; }
+        public int Points { get; set; }
+        public IEquiqement equiqement { set; get; }
+        public IParticipant.TeamColors TeamColor { get; set; }
+
+
+        public Driver(string name, int points, IEquiqement equiqement, IParticipant.TeamColors teamColor)
         {
-            naam = naam;
-            aantal = aantal;
+           this.Name = name;
+           this.Points = points; //0 
+           this.equiqement = equiqement;   
+           this.TeamColor = teamColor;
+
         }
 
         public Driver()

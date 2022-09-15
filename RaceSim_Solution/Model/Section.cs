@@ -8,8 +8,13 @@ namespace Model
 {
     public class Section
     {
-         public SectionTypes SectionType { get; }
-        
+        #region Props
+
+        public SectionTypes SectionType { get; set; }
+       
+        public static int SectionLength { get; set; }
+        #endregion
+
         public enum SectionTypes
         {
             Straight,
@@ -18,6 +23,12 @@ namespace Model
             Startgrid,
             Finish
         }
- 
+
+        public Section(SectionTypes sectionType)
+        {
+            SectionType = sectionType;
+            SectionLength = 20;
+        }
+
     }
 }

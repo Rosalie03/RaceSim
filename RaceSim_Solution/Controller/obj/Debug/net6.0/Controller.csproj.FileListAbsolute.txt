@@ -10,3 +10,6 @@ C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0
 C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\refint\Controller.dll
 C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.pdb
 C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\ref\Controller.dll
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\bin\Debug\net6.0\Model.dll
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\bin\Debug\net6.0\Model.pdb
+C:\Users\rosal\source\repos\RaceSim\RaceSim_Solution\Controller\obj\Debug\net6.0\Controller.csproj.CopyComplete

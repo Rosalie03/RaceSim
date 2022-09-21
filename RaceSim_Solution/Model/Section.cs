@@ -28,6 +28,7 @@ namespace Model
         {
             SectionType = sectionType;
             SectionLength = 20;
+            
         }
 
     }

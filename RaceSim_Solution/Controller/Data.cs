@@ -6,20 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Model;
+using Controller;
 
 
 namespace Controller
 {
     public static class Data
     {
-        static Competition? Competition;
+        public static Competition Competition;
+
+        public static Race CurrentRace;
 
         #region Methods
         public static void Initialize() 
         {
            Competition = new Competition();
+          
+           AddParticipent(); 
            AddTrack();
-           AddParticipent();
         }
         public static void AddParticipent()
         {
@@ -28,12 +32,70 @@ namespace Controller
             Competition.Participants.Add(new Driver("C", 0, new Car(10, 10, 10, false), IParticipant.TeamColors.green));
         }
 
+
+
         public static void AddTrack()
         {
-            Competition.Tracks.Enqueue(new Track());
-            Competition.Tracks.Enqueue(new Track());
-            Competition.Tracks.Enqueue(new Track());
+            Section.SectionTypes[]? R1 =
+ {
+                Section.SectionTypes.Startgrid,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Finish,
+
+            };
+
+            Competition.Tracks.Enqueue(new Track("r1", R1));
+
+            Section.SectionTypes[]? R2 =
+{
+                Section.SectionTypes.Startgrid,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Finish,
+
+            };
+
+            Competition.Tracks.Enqueue(new Track("r2", R2));
+
+            Section.SectionTypes[]? R3 =
+{
+                Section.SectionTypes.Startgrid,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Finish,
+
+            };
+
+            Competition.Tracks.Enqueue(new Track("r3", R3));
+
         }
+
+        public static void NextRace()
+        {
+            Track r = Competition.NextTrack();
+            if (r != null)
+            {
+                CurrentRace = new Race(r, Competition.Participants);
+            }
+            else return;
+        }
+
         #endregion
     }
 }

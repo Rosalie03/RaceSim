@@ -19,14 +19,9 @@ namespace Model
         public Driver(string name, int points, IEquiqement equiqement, IParticipant.TeamColors teamColor)
         {
            this.Name = name;
-           this.Points = points; //0 
+           this.Points = points; 
            this.equiqement = equiqement;   
            this.TeamColor = teamColor;
-
-        }
-
-        public Driver()
-        {
 
         }
     }

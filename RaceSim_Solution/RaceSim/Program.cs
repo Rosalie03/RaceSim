@@ -2,13 +2,23 @@
 using Model;
 using Controller;
 
-namespace RaceSim
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        Data.Initialize();
+        Data.NextRace();
+
+        Console.WriteLine(Data.CurrentRace.track.Name);
+        Data.NextRace();
+        Console.WriteLine(Data.CurrentRace.track.Name);
+        Data.NextRace();
+        Console.WriteLine(Data.CurrentRace.track.Name);
+
+
+        for (; ; )
         {
-            Data.Initialize();
+            Thread.Sleep(500);
         }
     }
 }

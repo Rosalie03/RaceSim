@@ -4,26 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Model
 {
     public class Track
     {
-        string Name;
-        LinkedList<Section> Sections;
+        public string Name { get; set; }          
+        public LinkedList<Section> Sections { get; set; }
 
         #region constructors
-        public Track (string name, Section.SectionTypes[] sections)
+        public Track(string name, Section.SectionTypes[] sections)
         {
-            this.Name = name;
-            this.Sections = new LinkedList<Section>();
+            Name = name;
+            LinkedList<Section> sectionList = new LinkedList<Section>();
+
+            for (int i = 0; i < sections.Length; i++)
+            {
+                Section section = new Section(sections[i]);
+                sectionList.AddLast(section);
+            }
         }
 
-        public Track()
-        {
-
-        }
-        #endregion
+    }
 
 
     }
-}
+#endregion
+

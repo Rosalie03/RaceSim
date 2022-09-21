@@ -12,12 +12,24 @@ namespace Model
         
         public Queue<Track> Tracks;
 
-        
+        public Competition()
+        {
+            Tracks = new Queue<Track>();
+            Participants = new List<IParticipant>();
+        }
 
-        #region Constructor
+
+        #region methods
         public Track NextTrack()
         {
-           return Tracks.Dequeue();
+            if(Tracks.TryDequeue(out Track result))
+            {
+            return result;
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion
     }

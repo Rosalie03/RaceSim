@@ -8,9 +8,9 @@ namespace Model
 {
     public interface IEquiqement
     {
-        int Quility { get; }   
-        int Performance { get; }
-        int Speed { get; } 
-        bool isBroken { get; }
+        int Quility { get; set; }   
+        int Performance { get; set; }
+        int Speed { get; set; } 
+        bool isBroken { get; set; }
     }
 }

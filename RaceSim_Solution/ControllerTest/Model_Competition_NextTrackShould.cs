@@ -36,14 +36,13 @@ namespace ControllerTest
                 Section.SectionTypes.Startgrid,
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Straight,
-                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Rightcorner, 
                 Section.SectionTypes.Finish,
             });
 
             _competition.Tracks.Enqueue(tr);
-             Track result = _competition.NextTrack();
-
-            Assert.Equals(tr, result);
+            Track result = _competition.NextTrack();
+            Assert.AreEqual(tr, result);
         }
 
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
@@ -96,9 +95,10 @@ namespace ControllerTest
             _competition.Tracks.Enqueue(tr4);
 
             _competition.NextTrack();
+
             Track result = _competition.NextTrack();
 
-            Assert.Equals(tr4, result);
+            Assert.AreEqual(tr4, result);
             
         }
         #endregion

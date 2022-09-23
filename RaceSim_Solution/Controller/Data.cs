@@ -32,11 +32,9 @@ namespace Controller
             Competition.Participants.Add(new Driver("C", 0, new Car(10, 10, 10, false), IParticipant.TeamColors.green));
         }
 
-
-
         public static void AddTrack()
         {
-            Section.SectionTypes[]? R1 =
+            Section.SectionTypes[] R1 =
  {
                 Section.SectionTypes.Startgrid,
                 Section.SectionTypes.Lefcorner,
@@ -52,7 +50,7 @@ namespace Controller
 
             Competition.Tracks.Enqueue(new Track("r1", R1));
 
-            Section.SectionTypes[]? R2 =
+            Section.SectionTypes[] R2 =
 {
                 Section.SectionTypes.Startgrid,
                 Section.SectionTypes.Lefcorner,
@@ -68,7 +66,7 @@ namespace Controller
 
             Competition.Tracks.Enqueue(new Track("r2", R2));
 
-            Section.SectionTypes[]? R3 =
+            Section.SectionTypes[] R3 =
 {
                 Section.SectionTypes.Startgrid,
                 Section.SectionTypes.Lefcorner,

@@ -93,13 +93,72 @@ internal class Program
                 Section.SectionTypes.Straight,
                 Section.SectionTypes.Finish,
             });
+        Track t4 = new Track("t", new[]
+{
+                Section.SectionTypes.Startgrid,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Lefcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Straight,
+                Section.SectionTypes.Rightcorner,
+                Section.SectionTypes.Finish,
+            });
 
         Console.BackgroundColor = ConsoleColor.Blue;
         Data.Initialize();
         Visuals.Initialize();
 
-        //Visuals.DrawTrack(t);
-        Visuals.DrawTrack(t);
+        
+        Visuals.DrawTrack(t4);
 
         
 

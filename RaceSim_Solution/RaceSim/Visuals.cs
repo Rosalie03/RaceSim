@@ -173,7 +173,20 @@ namespace RaceSim
 
                 if(Direction == Directions.West)
                 {
-                    y += 4; 
+                    y -= 4;
+                    x -= 8;
+                }
+                if(Direction == Directions.East)
+                {
+                    y -= 4;
+                }
+               
+            }
+            if(Lchanged == true && (sectionStrings == _startVertical || sectionStrings == _straightVertical || sectionStrings == _finishVertical))
+            {
+                if(Direction == Directions.North)
+                {
+                    y -= 8;
                 }
             }
             if(Rchanged == true && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
@@ -185,7 +198,7 @@ namespace RaceSim
                 }
                 if(Direction == Directions.West)
                 {
-                    y -=4;
+                    y -= 4;
                     x -= 8;
                 }
                 if(Direction == Directions.North)
@@ -200,14 +213,14 @@ namespace RaceSim
             }
             if(Rchanged == true && (sectionStrings == _straightVertical || sectionStrings == _startVertical || sectionStrings == _finishVertical))
             {
-                if(Direction == Directions.West)
-                {
-                    //y -=4;
-                }
 
                 if (Direction == Directions.North)
                 {
                     y -= 8;
+                }
+                if(Direction == Directions.South)
+                {
+
                 }
 
             }
@@ -234,9 +247,18 @@ namespace RaceSim
                 x -= 4;
                 y -= 4;
             }
+            if(sectionStrings == _leftCornerHorizontal && Direction == Directions.North)
+            {
+                y -= 4;
+            }
             if(sectionStrings == _rightCornerHorizontal && Direction == Directions.North)
             {
                 y -= 8;
+            }
+            if(sectionStrings == _rightCornerHorizontal && Direction == Directions.West)
+            {
+                x-=5;
+                y-=4;
             }
             if(sectionStrings == _rightCornerVertical && Direction == Directions.East)
             {
@@ -260,9 +282,31 @@ namespace RaceSim
        static bool Rchanged = false; 
         public static Directions SetDirection(Section.SectionTypes sectionTypes, Directions dr)
         {
+            Lchanged = false;
+            Rchanged =false;
             if (sectionTypes == Section.SectionTypes.Lefcorner)
             {
-                if (Direction == Directions.North)
+
+                switch (dr)
+                {
+                    case(Directions.North):
+                        Direction = Directions.West;
+                        break;
+
+                    case(Directions.East):
+                        Direction = Directions.North;
+                        break;
+
+                        case(Directions.West):
+                        Direction = Directions.South;
+                        break;
+
+                        case(Directions.South):
+                        Direction = Directions.East;
+                        break;
+
+                }
+/*                if (Direction == Directions.North)
                 {
                      Direction = Directions.West;
                 }
@@ -277,7 +321,7 @@ namespace RaceSim
                 if (Direction == Directions.West )
                 {
                      Direction = Directions.South;
-                }
+                }*/
                 Lchanged = true;
                            
                }

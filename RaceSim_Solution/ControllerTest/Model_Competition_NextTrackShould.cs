@@ -28,7 +28,7 @@ namespace ControllerTest
             Track result = _competition.NextTrack();
             Assert.IsNull(result);
         }
-
+        [Test]
         public void NextTrack_OneInQueue_ReturnTrack()
         {
             Track tr = new Track("R4", new[]
@@ -44,7 +44,7 @@ namespace ControllerTest
             Track result = _competition.NextTrack();
             Assert.AreEqual(tr, result);
         }
-
+        [Test]
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
         {
             Track tr2 = new Track("R5", new[]
@@ -65,7 +65,7 @@ namespace ControllerTest
             
             Assert.IsNull(result2);
         }
-
+        [Test]
         public void NextTrack_TwoInQueue_ReturnNextTrack()
         {
             Track tr3 = new Track("R6", new[]

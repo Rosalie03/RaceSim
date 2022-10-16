@@ -12,16 +12,18 @@ namespace Model
     {
         public string Name { get; set; }
         public int Points { get; set; }
+        public int Position { get; set; }
         public IEquiqement equiqement { set; get; }
         public IParticipant.TeamColors TeamColor { get; set; }
 
 
-        public Driver(string name, int points, IEquiqement equiqement, IParticipant.TeamColors teamColor)
+        public Driver(string name, IEquiqement equiqement, IParticipant.TeamColors teamColor)
         {
            this.Name = name;
-           this.Points = points; 
+           this.Points = 0; 
            this.equiqement = equiqement;   
            this.TeamColor = teamColor;
+           this.Position = 0;
 
         }
     }

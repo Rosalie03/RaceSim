@@ -18,48 +18,68 @@ namespace RaceSim
 
 
         public static int x = 30;
-        public static int y = 0;    
+        public static int y = 0;
 
 
         public static void Initialize()
         {
             Console.CursorVisible = false;
-            Direction = Directions.East;
-
+            Direction = Directions.East;           
 
         }
         #region Graphics
 
 
-        private static string[] _finishHorizontal = { "════", " #  ", " #  ", "════" };
-        private static string[] _finishVertical = { "║  ║", "║  ║", "║##║", "║  ║" };
+        private static string[] _finishHorizontal = {         "════",
+                                                              "  # ",
+                                                              "  # ",
+                                                              "════" };
 
-        private static string[] _startHorizontal = { "════", " *  ", " *  ", "════" };
-        private static string[] _startVertical = { "║  ║", "║  ║", "║**║", "║  ║" };
+        private static string[] _startHorizontal = {         "════",
+                                                             "  * ",
+                                                             "  * ",
+                                                             "════" };
 
-        private static string[] _straightHorizontal = { "════", "    ", "    ", "════" };
-        private static string[] _straightVertical = { "║  ║", "║  ║", "║  ║", "║  ║" };
+        private static string[] _finishVertical = {         "║  ║",
+                                                            "║##║",
+                                                            "║##║",
+                                                            "║  ║" };
+
+        private static string[] _startVertical = {         "║  ║",
+                                                           "║**║",
+                                                           "║**║",
+                                                           "║  ║" };
+
+        private static string[] _straightHorizontal = {         "════",
+                                                                "  1 ",
+                                                                "  2 ",
+                                                                "════" };
+
+        private static string[] _straightVertical = {         "║  ║",
+                                                              "║ 1║",
+                                                              "║2 ║",
+                                                              "║  ║" };
 
 
-        private static string[] _leftCornerHorizontal = { "═══╗", 
-                                                          "   ║", 
-                                                          "   ║", 
-                                                          "╗  ║" };
+        private static string[] _corner1 = {         "═══╗",
+                                                     "   ║",
+                                                     "1  ║",
+                                                     "╗2 ║" };
 
-        private static string[] _leftCornerVertical = { "║  ╚", 
-                                                        "║   ", 
-                                                        "║   ", 
-                                                        "╚═══" };
+        private static string[] _corner2 = {         "║ 1╚",
+                                                     "║  2",
+                                                     "║   ",
+                                                     "╚═══" };
 
-        private static string[] _rightCornerHorizontal = { "╔════", 
-                                                           "║    ", 
-                                                           "║    ",
-                                                           "║  ╔═" };
+        private static string[] _corner3 = {         "╔═══",
+                                                     "║   ",
+                                                     "║  1",
+                                                     "║ 2╔" };
 
-        private static string[] _rightCornerVertical = { "╝  ║", 
-                                                         "   ║", 
-                                                         "   ║",    
-                                                         "═══╝" };
+        private static string[] _corner4 = {         "╝1 ║",
+                                                     "2  ║",
+                                                     "   ║",
+                                                     "═══╝" };
 
         #endregion
 
@@ -72,6 +92,7 @@ namespace RaceSim
         }
 
         #region Methods
+
         public static void DrawTrack(Track track)
         {
 
@@ -82,46 +103,46 @@ namespace RaceSim
                     case Section.SectionTypes.Startgrid:
                         if (Direction == Directions.West || Direction == Directions.East)
                         {
-                            ConsoleWriteSectionV(_startHorizontal, 4, 0);
+                            ConsoleWriteSectionV(_startHorizontal, section);
                         }
                         else
-                            ConsoleWriteSectionV(_startVertical, 0, 0);
+                            ConsoleWriteSectionV(_startVertical,  section);
                         break;
 
                     case Section.SectionTypes.Straight:
                         if (Direction == Directions.West || Direction == Directions.East)
                         {
-                            ConsoleWriteSectionV(_straightHorizontal, 4, 0);
+                            ConsoleWriteSectionV(_straightHorizontal,  section);
                         }
                         else
-                            ConsoleWriteSectionV(_straightVertical, 0, 0);
+                            ConsoleWriteSectionV(_straightVertical, section);
                         break;
 
                     case Section.SectionTypes.Finish:
                         if (Direction == Directions.West || Direction == Directions.East)
                         {
-                            ConsoleWriteSectionV(_finishHorizontal, 4,0);
+                            ConsoleWriteSectionV(_finishHorizontal, section);
                         }
                         else
-                            ConsoleWriteSectionV(_finishVertical,0,0);
+                            ConsoleWriteSectionV(_finishVertical, section);
                         break;
 
                     case Section.SectionTypes.Lefcorner:
-                    if(Direction == Directions.East)
+                        if (Direction == Directions.East)
                         {
-                            ConsoleWriteSectionV(_rightCornerVertical,0,0 );                         
+                            ConsoleWriteSectionV(_corner4, section);
                         }
-                    if(Direction == Directions.South)
+                        if (Direction == Directions.South)
                         {
-                            ConsoleWriteSectionV(_leftCornerVertical,0,0);
+                            ConsoleWriteSectionV(_corner2, section);
                         }
-                    if(Direction == Directions.North)
+                        if (Direction == Directions.North)
                         {
-                            ConsoleWriteSectionV(_leftCornerHorizontal,0,0);
+                            ConsoleWriteSectionV(_corner1, section);
                         }
-                        if(Direction == Directions.West)
+                        if (Direction == Directions.West)
                         {
-                            ConsoleWriteSectionV(_rightCornerHorizontal,0,0) ;          
+                            ConsoleWriteSectionV(_corner3, section);
                         }
                         Direction = SetDirection(Section.SectionTypes.Lefcorner, Direction);
                         break;
@@ -129,31 +150,28 @@ namespace RaceSim
                     case Section.SectionTypes.Rightcorner:
                         if (Direction == Directions.East)
                         {
-                            ConsoleWriteSectionV(_leftCornerHorizontal, 0, 0) ;
+                            ConsoleWriteSectionV(_corner1, section);
                         }
                         if (Direction == Directions.South)
                         {
-                            ConsoleWriteSectionV(_rightCornerVertical, 0, 0);                          
+                            ConsoleWriteSectionV(_corner4, section);
                         }
                         if (Direction == Directions.North)
                         {
-                            ConsoleWriteSectionV(_rightCornerHorizontal, 0, 0);                          
+                            ConsoleWriteSectionV(_corner3, section);
                         }
                         if (Direction == Directions.West)
                         {
-                            ConsoleWriteSectionV(_leftCornerVertical, 0, 0);                               
-                            
+                            ConsoleWriteSectionV(_corner2, section);
+
                         }
                         Direction = SetDirection(Section.SectionTypes.Rightcorner, Direction);
                         break;
                 }
             }
         }
-        public static void ConsoleWriteSectionV(string[] sectionStrings, int tx, int ty)
-        {   
-            x = x + tx;
-            y = y + ty;
-
+        public static void ConsoleWriteSectionV(string[] sectionStrings, Section section)
+        {
             if (Lchanged == true && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
             {
                 if (Direction == Directions.South)
@@ -161,138 +179,165 @@ namespace RaceSim
                     y -= 4;
                 }
 
-                if(Direction == Directions.West)
+                if (Direction == Directions.West)
                 {
                     y -= 4;
-                    x -= 8;
+                    x -= 4;
                 }
-                if(Direction == Directions.East)
+                if (Direction == Directions.East)
                 {
                     y -= 4;
+                    x += 4;
                 }
-               
+
             }
-            if(Lchanged == true && (sectionStrings == _startVertical || sectionStrings == _straightVertical || sectionStrings == _finishVertical))
+            if (Lchanged == true && (sectionStrings == _startVertical || sectionStrings == _straightVertical || sectionStrings == _finishVertical))
             {
-                if(Direction == Directions.North)
+                if (Direction == Directions.North)
                 {
                     y -= 8;
                 }
             }
-            if(Rchanged == true && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
+            if (Rchanged == true && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
             {
                 if (Direction == Directions.South)
                 {
                     y -= 4;
-                    x -= 8;
+                    x -= 4;
                 }
-                if(Direction == Directions.West)
+                if (Direction == Directions.West)
                 {
                     y -= 4;
-                    x -= 8;
+                    x -= 4;
                 }
                 if (Direction == Directions.East)
                 {
-                    y -= 4;                   
+                    y -= 4;
+                    x += 4;
                 }
 
             }
-            if(Rchanged == true && (sectionStrings == _straightVertical || sectionStrings == _startVertical || sectionStrings == _finishVertical))
+            if (Rchanged == true && (sectionStrings == _straightVertical || sectionStrings == _startVertical || sectionStrings == _finishVertical))
             {
 
                 if (Direction == Directions.North)
                 {
                     y -= 8;
                 }
-                if(Direction == Directions.South)
+                if (Direction == Directions.South)
                 {
+                  
+                }
 
+
+            }
+
+            if ((Lchanged == false && Rchanged == false) && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
+            {
+                if(Direction == Directions.East)
+                {
+                    y = 0;
+                    x += 4;
                 }
 
             }
 
-                if ((Lchanged == false && Rchanged == false) && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
-                {
-                    y = 0;
-
-                }
-
-            if (sectionStrings == _leftCornerHorizontal)
+            if (sectionStrings == _corner1)
             {
-                if(Direction == Directions.East)
+                if (Direction == Directions.East)
                 {
                     x += 4;
                     y -= 4;
                 }
-                if(Direction == Directions.North)
+                if (Direction == Directions.North)
                 {
                     y -= 4;
-                }               
+                }
             }
 
-            if(sectionStrings == _rightCornerHorizontal)
+            if (sectionStrings == _corner3)
             {
                 if (Direction == Directions.North)
                 {
                     y -= 8;
                 }
-                if(Direction == Directions.West)
+                if (Direction == Directions.West)
                 {
-                    x-=5;
-                    y-=4;
+                    x -= 8;
+                    y -= 4;
+                }
+                if(Direction == Directions.South)
+                {
+                   
                 }
             }
-            if(sectionStrings == _rightCornerVertical && Direction == Directions.East)
+            if (sectionStrings == _corner4)
             {
-                y -= 4;
+                if(Direction == Directions.East)
+                {
+                    y -= 4;
+                }
+
+                
             }
 
-            if (sectionStrings == _leftCornerVertical && Direction == Directions.West)
+            if (sectionStrings == _corner2)
             {
-                x -= 4;
-                y -= 4;
-            }
+                if(Direction == Directions.West)
+                {
+                    x -= 4;
+                    y -= 4;
 
-            foreach (string s in sectionStrings)
-            {             
+                }
+                if(Direction == Directions.South)
+                {
+                  
+                }
+                
+            }
+            
+
+
+            foreach (string s in sectionStrings)                    
+            {
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine(s);
                 y++;
-                
-            }
+
+            }            
         }
-        
-       static bool Lchanged =false; 
-       static bool Rchanged = false; 
+
+        static bool Lchanged = false;
+        static bool Rchanged = false;
         public static Directions SetDirection(Section.SectionTypes sectionTypes, Directions dr)
         {
             Lchanged = false;
-            Rchanged =false;
+            Rchanged = false;
             if (sectionTypes == Section.SectionTypes.Lefcorner)
             {
 
                 switch (dr)
                 {
-                    case(Directions.North):
+                    case (Directions.North):
                         Direction = Directions.West;
                         break;
 
-                    case(Directions.East):
+                    case (Directions.East):
                         Direction = Directions.North;
                         break;
 
-                        case(Directions.West):
+                    case (Directions.West):
                         Direction = Directions.South;
                         break;
 
-                        case(Directions.South):
+                    case (Directions.South):
                         Direction = Directions.East;
                         break;
 
                 }
                 Lchanged = true;
-                           
-               }           
+
+            }
 
             if (sectionTypes == Section.SectionTypes.Rightcorner)
             {
@@ -312,9 +357,12 @@ namespace RaceSim
                         break;
                 }
                 Rchanged = true;
-            }              
-                return Direction;
+            }
+            return Direction;
         }
+
+
+
         #endregion
     }
     

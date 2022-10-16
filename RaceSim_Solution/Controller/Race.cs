@@ -1,9 +1,12 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static Model.Section;
 
 namespace Controller
 {
@@ -18,6 +21,8 @@ namespace Controller
 
         private Dictionary<Section, SectionData> _positions;
 
+      
+
         #region Constructors
         public Race(Track track, List<IParticipant> participant)
         {
@@ -25,11 +30,20 @@ namespace Controller
             this.track = track;
             _random = new Random(DateTime.Now.Millisecond);
             Startime = DateTime.Now;
-            _positions = new Dictionary<Section, SectionData>();
+            _positions = new Dictionary<Section, SectionData>();                    
         }
         #endregion
 
         #region methodes
+        public void SetDriverStartPosition()
+        {
+
+
+
+
+
+        }
+        
 
         public SectionData GetSectionData(Section section)
         {
@@ -49,6 +63,8 @@ namespace Controller
             }
         
         }
+
+
 
         #endregion
     }

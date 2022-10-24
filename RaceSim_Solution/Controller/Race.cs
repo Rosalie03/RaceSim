@@ -6,7 +6,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using static Model.Section;
+
 
 namespace Controller
 {
@@ -21,6 +23,9 @@ namespace Controller
 
         private Dictionary<Section, SectionData> _positions;
 
+        private System.Timers.Timer _timer;
+
+        public event EventHandler<DriversChangedEventArgs> DriversChanged;
       
 
         #region Constructors
@@ -30,18 +35,48 @@ namespace Controller
             this.track = track;
             _random = new Random(DateTime.Now.Millisecond);
             Startime = DateTime.Now;
-            _positions = new Dictionary<Section, SectionData>();                    
+            _positions = new Dictionary<Section, SectionData>();
+
+            _timer = new System.Timers.Timer(500);
+            _timer.Elapsed += OnTimedEvent;
+
+            SetDriverStartPosition(track, participants);
+            Start();
         }
         #endregion
 
         #region methodes
-        public void SetDriverStartPosition()
+        public void OnTimedEvent(object obj, EventArgs ea)
         {
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs(track));
+        }
+
+        public void Start()
+        {
+            _timer.Start();
+            Startime = DateTime.Now;
+        }
 
 
+        public void SetDriverStartPosition(Track track, List<IParticipant> participants)
+        {         
+            Stack<IParticipant> Sparticipants = new Stack<IParticipant>(participants);
 
+            foreach (Section s in track.Sections)
+            {
+                if (s.SectionType == Section.SectionTypes.Startgrid)
+                {
+                    SectionData sd = GetSectionData(s);
 
+                    if(Sparticipants.Count == 0)                    
+                        return;
+                        sd!.Left = Sparticipants.Pop();
 
+                    if (Sparticipants.Count == 0)
+                        return;                  
+                        sd.Right = Sparticipants.Pop();                    
+                }
+            }
         }
         
 

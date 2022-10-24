@@ -22,25 +22,8 @@ internal class Program
         //Visuals.DrawTrack(Data.Competition.NextTrack());
        // Data.NextRace();
         Data.NextRace();
+        //Visuals.DrawTrack(Data.CurrentRace);
         Visuals.DrawTrack(Data.Competition.NextTrack());
-
-
-
-
-
-
-
-        //       Data.Initialize();
-        /*       Data.NextRace();*/
-
-
-        /*        Console.WriteLine(Data.CurrentRace.track.Name);
-                Data.NextRace();
-                Console.WriteLine(Data.CurrentRace.track.Name);
-                Data.NextRace();
-                Console.WriteLine(Data.CurrentRace.track.Name);*/
-
-
 
         for (; ; )
         {

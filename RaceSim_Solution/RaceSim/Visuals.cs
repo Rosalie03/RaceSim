@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -21,10 +22,14 @@ namespace RaceSim
         public static int y = 0;
 
 
+        public static SectionData sd;
+
+
         public static void Initialize()
         {
             Console.CursorVisible = false;
-            Direction = Directions.East;           
+            Direction = Directions.East;
+            Data.CurrentRace.DriversChanged += DriversChangedHandler;
 
         }
         #region Graphics
@@ -93,84 +98,92 @@ namespace RaceSim
 
         #region Methods
 
+
         public static void DrawTrack(Track track)
         {
+            Race race = Data.CurrentRace;
+            Track track1 = race.track;           
+            var inQueue = track1.Sections.First;
+            if (inQueue != null) { 
 
-            foreach (Section section in track.Sections)
-            {
-                switch (section.SectionType)
+                sd = race.GetSectionData(inQueue.Value);
+               
+                foreach (Section section in track.Sections)
                 {
-                    case Section.SectionTypes.Startgrid:
-                        if (Direction == Directions.West || Direction == Directions.East)
-                        {
-                            ConsoleWriteSectionV(_startHorizontal, section);
-                        }
-                        else
-                            ConsoleWriteSectionV(_startVertical,  section);
-                        break;
+                    switch (section.SectionType)
+                    {
+                        case Section.SectionTypes.Startgrid:
+                            if (Direction == Directions.West || Direction == Directions.East)
+                            {
+                                ConsoleWriteSectionV(_startHorizontal, section, sd);
+                            }
+                            else
+                                ConsoleWriteSectionV(_startVertical, section,sd);
+                            break;
 
-                    case Section.SectionTypes.Straight:
-                        if (Direction == Directions.West || Direction == Directions.East)
-                        {
-                            ConsoleWriteSectionV(_straightHorizontal,  section);
-                        }
-                        else
-                            ConsoleWriteSectionV(_straightVertical, section);
-                        break;
+                        case Section.SectionTypes.Straight:
+                            if (Direction == Directions.West || Direction == Directions.East)
+                            {
+                                ConsoleWriteSectionV(_straightHorizontal, section, sd);
+                            }
+                            else
+                                ConsoleWriteSectionV(_straightVertical, section, sd);
+                            break;
 
-                    case Section.SectionTypes.Finish:
-                        if (Direction == Directions.West || Direction == Directions.East)
-                        {
-                            ConsoleWriteSectionV(_finishHorizontal, section);
-                        }
-                        else
-                            ConsoleWriteSectionV(_finishVertical, section);
-                        break;
+                        case Section.SectionTypes.Finish:
+                            if (Direction == Directions.West || Direction == Directions.East)
+                            {
+                                ConsoleWriteSectionV(_finishHorizontal, section, sd);
+                            }
+                            else
+                                ConsoleWriteSectionV(_finishVertical, section, sd);
+                            break;
 
-                    case Section.SectionTypes.Lefcorner:
-                        if (Direction == Directions.East)
-                        {
-                            ConsoleWriteSectionV(_corner4, section);
-                        }
-                        if (Direction == Directions.South)
-                        {
-                            ConsoleWriteSectionV(_corner2, section);
-                        }
-                        if (Direction == Directions.North)
-                        {
-                            ConsoleWriteSectionV(_corner1, section);
-                        }
-                        if (Direction == Directions.West)
-                        {
-                            ConsoleWriteSectionV(_corner3, section);
-                        }
-                        Direction = SetDirection(Section.SectionTypes.Lefcorner, Direction);
-                        break;
+                        case Section.SectionTypes.Lefcorner:
+                            if (Direction == Directions.East)
+                            {
+                                ConsoleWriteSectionV(_corner4, section, sd);
+                            }
+                            if (Direction == Directions.South)
+                            {
+                                ConsoleWriteSectionV(_corner2, section, sd);
+                            }
+                            if (Direction == Directions.North)
+                            {
+                                ConsoleWriteSectionV(_corner1, section, sd);
+                            }
+                            if (Direction == Directions.West)
+                            {
+                                ConsoleWriteSectionV(_corner3, section, sd);
+                            }
+                            Direction = SetDirection(Section.SectionTypes.Lefcorner, Direction);
+                            break;
 
-                    case Section.SectionTypes.Rightcorner:
-                        if (Direction == Directions.East)
-                        {
-                            ConsoleWriteSectionV(_corner1, section);
-                        }
-                        if (Direction == Directions.South)
-                        {
-                            ConsoleWriteSectionV(_corner4, section);
-                        }
-                        if (Direction == Directions.North)
-                        {
-                            ConsoleWriteSectionV(_corner3, section);
-                        }
-                        if (Direction == Directions.West)
-                        {
-                            ConsoleWriteSectionV(_corner2, section);
+                        case Section.SectionTypes.Rightcorner:
+                            if (Direction == Directions.East)
+                            {
+                                ConsoleWriteSectionV(_corner1, section, sd);
+                            }
+                            if (Direction == Directions.South)
+                            {
+                                ConsoleWriteSectionV(_corner4, section, sd);
+                            }
+                            if (Direction == Directions.North)
+                            {
+                                ConsoleWriteSectionV(_corner3, section, sd);
+                            }
+                            if (Direction == Directions.West)
+                            {
+                                ConsoleWriteSectionV(_corner2, section, sd);
 
-                        }
-                        Direction = SetDirection(Section.SectionTypes.Rightcorner, Direction);
-                        break;
+                            }
+                            Direction = SetDirection(Section.SectionTypes.Rightcorner, Direction);
+                            break;
+                    }
                 }
             }
         }
-        public static void ConsoleWriteSectionV(string[] sectionStrings, Section section)
+        public static void ConsoleWriteSectionV(string[] sectionStrings, Section section, SectionData sd)
         {
             if (Lchanged == true && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
             {
@@ -215,31 +228,22 @@ namespace RaceSim
                     y -= 4;
                     x += 4;
                 }
-
             }
             if (Rchanged == true && (sectionStrings == _straightVertical || sectionStrings == _startVertical || sectionStrings == _finishVertical))
             {
-
                 if (Direction == Directions.North)
                 {
                     y -= 8;
                 }
-                if (Direction == Directions.South)
-                {
-                  
-                }
-
-
             }
 
             if ((Lchanged == false && Rchanged == false) && (sectionStrings == _straightHorizontal || sectionStrings == _startHorizontal || sectionStrings == _finishHorizontal))
             {
-                if(Direction == Directions.East)
+                if (Direction == Directions.East)
                 {
                     y = 0;
                     x += 4;
                 }
-
             }
 
             if (sectionStrings == _corner1)
@@ -266,49 +270,61 @@ namespace RaceSim
                     x -= 8;
                     y -= 4;
                 }
-                if(Direction == Directions.South)
-                {
-                   
-                }
             }
             if (sectionStrings == _corner4)
             {
-                if(Direction == Directions.East)
+                if (Direction == Directions.East)
                 {
                     y -= 4;
                 }
-
-                
             }
 
             if (sectionStrings == _corner2)
             {
-                if(Direction == Directions.West)
+                if (Direction == Directions.West)
                 {
                     x -= 4;
                     y -= 4;
-
                 }
-                if(Direction == Directions.South)
-                {
-                  
-                }
-                
             }
-            
 
-
-            foreach (string s in sectionStrings)                    
+            foreach (string s in sectionStrings)
             {
+                string s2 = s;
+                s2 = PlaceDrivers(s, sd);
                 Console.SetCursorPosition(x, y);
-                Console.WriteLine(s);
+                Console.WriteLine(s2);
                 y++;
 
-            }            
+            }
+        }
+        public static string PlaceDrivers(string st, SectionData sd)
+        {
+            if (sd.Left != null)
+            {
+                st = st.Replace("1", sd.Left.Name.Substring(0, 1));
+            }
+            else
+            {
+                st = st.Replace("1", " ");
+            }
+
+            if (sd.Right != null)
+            {
+                st = st.Replace("2", sd.Right.Name.Substring(0, 1));
+            }
+            else
+            {
+
+                st = st.Replace("2", " ");
+            }
+
+            return st;
         }
 
-        static bool Lchanged = false;
-        static bool Rchanged = false;
+
+        static bool Lchanged;
+        static bool Rchanged;
         public static Directions SetDirection(Section.SectionTypes sectionTypes, Directions dr)
         {
             Lchanged = false;
@@ -362,7 +378,10 @@ namespace RaceSim
         }
 
 
-
+        public static void DriversChangedHandler(object s, DriversChangedEventArgs d )
+        {
+            DrawTrack(d.Track);
+        }
         #endregion
     }
     
